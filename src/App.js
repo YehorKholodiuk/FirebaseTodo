@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import db from './connectDB'
+import {collection, getDocs} from 'firebase/firestore'
 import './App.css';
+import {useEffect, useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [tasks, setTasks] = useState([])
+    useEffect(() => {
+            const getTasks = async () => {
+                const tasksCol = collection(db, 'tasks');
+                const tasksSnapshot = await getDocs(tasksCol);
+                const tasksList = tasksSnapshot.docs.map(doc => doc.data());
+                console.log(tasksList)
+                setTasks(tasksList)
+            }
+            getTasks()
+        }
+    )
+    return (
+        <div className="App">
+            <ul>
+                {tasks.map(task => (
+                        <li key={task.title}> {task.title} </li>
+                    ))
+                }
+            </ul>
+        </div>
+    );
 }
 
 export default App;
