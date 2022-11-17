@@ -2,6 +2,7 @@ import db from './connectDB'
 import {collection, getDocs, query, onSnapshot} from 'firebase/firestore'
 import './App.css';
 import {useEffect, useState} from "react";
+import CreateTaskForm from "./createTaskForm";
 
 function App() {
     const [tasks, setTasks] = useState([])
@@ -30,6 +31,7 @@ function App() {
     console.log(tasks)
     return (
         <div className="App">
+            <CreateTaskForm/>
             <ul>
                 {tasks.map(task => (
                         <li key={task.title}> {task.title} </li>
