@@ -11,11 +11,15 @@ const onEdit = (id) => {
     console.log(id);
     setEditTaskId(id)
 }
+
+const onEditCancel = () => {
+        setEditTaskId(null)
+}
     return (
         <div className="App">
             <CreateTaskForm/>
            <TaskList onEdit={onEdit}/>
-            <EditTaskForm id={editTaskId}/>
+            <EditTaskForm id={editTaskId} onCancel={onEditCancel}/>
         </div>
     );
 }
