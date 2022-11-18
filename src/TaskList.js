@@ -1,5 +1,5 @@
 import db from './connectDB'
-import {collection, getDocs, query, onSnapshot, deleteDoc,doc} from 'firebase/firestore'
+import {collection, getDocs, query, onSnapshot, deleteDoc,doc, updateDoc} from 'firebase/firestore'
 import './App.css';
 import {useEffect, useState} from "react";
 
@@ -36,13 +36,27 @@ function TaskList() {
 
 
     }
+//onToggle function to edit task status in firestore
+    const onToggleDone = (id) => {
+        const task = tasks.find(task => task.id === id);
+        const updatedTask = {...task, completed: !task.completed}
+        //update task in firestore
+        updateDoc(doc(db, 'tasks', id), updatedTask)
+            .then(r => console.log(r))
+            .catch(err => console.log(err));
+
+    }
 
     return (
 
             <ul>
                 {tasks.map(task => (
-                    <li key={task.id}> {task.title}
-                        <button onClick={() => onDeleteTask(task.id)}>Delete</button></li>
+                    <li key={task.id}>
+                        {task.completed ? <s>{task.title}</s>:task.title}
+                        <button onClick={() => onDeleteTask(task.id)}>Delete</button>
+                        <button onClick={()=> onToggleDone(task.id)}>Done</button>
+
+                    </li>
                 ))
                 }
             </ul>
