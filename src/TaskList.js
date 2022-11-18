@@ -4,7 +4,7 @@ import './App.css';
 import {useEffect, useState} from "react";
 
 
-function TaskList() {
+function TaskList(props) {
     const [tasks, setTasks] = useState([])
     // useEffect(() => {
     // const getTasks = async () => {
@@ -55,7 +55,7 @@ function TaskList() {
                         {task.completed ? <s>{task.title}</s>:task.title}
                         <button onClick={() => onDeleteTask(task.id)}>Delete</button>
                         <button onClick={()=> onToggleDone(task.id)}>Done</button>
-
+                        <button onClick={()=> props.onEdit(task.id)}>Edit</button>
                     </li>
                 ))
                 }
