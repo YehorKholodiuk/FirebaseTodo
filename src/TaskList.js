@@ -49,17 +49,17 @@ function TaskList(props) {
 
     return (
 
-            <ul>
-                {tasks.map(task => (
-                    <li key={task.id}>
-                        {task.completed ? <s>{task.title}</s>:task.title}
-                        <button onClick={() => onDeleteTask(task.id)}>Delete</button>
-                        <button onClick={()=> onToggleDone(task.id)}>Done</button>
-                        <button onClick={()=> props.onEdit(task.id)}>Edit</button>
-                    </li>
-                ))
-                }
-            </ul>
+        <ul>
+            {tasks.map(task => (
+                <li key={task.id}>
+                    {task.completed ? <s>{task.title}</s>:task.title}
+                    <button onClick={() => onDeleteTask(task.id)}>Delete</button>
+                    <button onClick={()=> onToggleDone(task.id)}>Done</button>
+                    <button onClick={()=> props.onEdit(task.id)}>Edit</button>
+                </li>
+            ))
+            }
+        </ul>
 
     );
 }
