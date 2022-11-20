@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
+
 import db from './connectDB'
 function CreateTaskForm (){
     const [title,setTitle] = useState('');
@@ -14,11 +15,14 @@ function CreateTaskForm (){
         setTitle('')
     }
     return (
-        <form>
-            <input type = "text" placeholfer = "Enter task title" value = {title}
-            onChange = { e => setTitle(e.target.value)}
+        <form className="input-group mb-3" >
+            <input
+                   type = "text" placeholfer = "Enter task title"
+                   value = {title}
+                   onChange = { e => setTitle(e.target.value)}
+                   className="form-control"
             />
-            <button type= "submit" onClick={handleSubmit}>Add Task</button>
+            <button type= "submit" className="btn btn-primary" onClick={handleSubmit}>Add Task</button>
         </form>
     );
 }

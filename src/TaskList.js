@@ -49,13 +49,21 @@ function TaskList(props) {
 
     return (
 
-        <ul>
+        <ul class="list-group">
             {tasks.map(task => (
-                <li key={task.id}>
-                    {task.completed ? <s>{task.title}</s>:task.title}
-                    <button onClick={() => onDeleteTask(task.id)}>Delete</button>
-                    <button onClick={()=> onToggleDone(task.id)}>Done</button>
-                    <button onClick={()=> props.onEdit(task.id)}>Edit</button>
+                <li key={task.id} className='list-group-item'>
+                    <div className="row">
+                        <div className="col-8">
+                            {task.completed ? <s>{task.title}</s>:task.title}
+                        </div>
+                        <div className="col-4">
+                            <button onClick={() => onDeleteTask(task.id)}>Delete</button>
+                            <button onClick={()=> onToggleDone(task.id)}>Done</button>
+                            <button onClick={()=> props.onEdit(task.id)}>Edit</button>
+                        </div>
+
+                    </div>
+
                 </li>
             ))
             }
